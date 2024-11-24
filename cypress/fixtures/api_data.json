@@ -1,0 +1,31 @@
+{
+  "api_user":{
+  "user": "dogBite",
+  "password": "123456"
+  },
+  "not_register":{
+  "user": "not registered",
+  "password": "123456"
+  },
+  "api_product": {
+  "produtoNome": "brand new Rwn",
+  "produtoValor": 2800,
+  "produtoCores": ["madeira", "aluminio"]
+  },
+  "api_product2": {
+  "produtoNome": "Ganza from pipa",
+  "produtoValor": 500,
+  "produtoCores": ["preto", "prateado"]
+  },
+  "api_product3": {
+  "produtoNome": "agogo 2.5",
+  "produtoValor": 1500,
+  "produtoCores": ["amarelo", "rosa"]
+  },
+  "api_changed_product": {  
+  "produtoNome": "sansung galaxy 24 pro max",
+  "produtoValor": 5000,
+  "produtoCores": ["prateado", "preto"]
+  }
+
+}
