@@ -1,16 +1,17 @@
 /// <reference types="cypress" />
+import faker from 'faker'
 
-describe('/PUT - PUT functionality ', function () {
+describe('/POST - component functionality ', function () {
 
     beforeEach(function () {
         cy.fixture('api_data').then(function (data) {
             this.data = data
         })
     })
-    it('CT-001 should be able to change data of a product', function () {
+    it('CT-001 should create new component', function () {
         const user = this.data.api_user
-        const product = this.data.api_product
-        const changedProduct = this.data.api_changed_product
+        const product = this.data.api_product3
+        const component = this.data.api_component
 
         cy.apiLogin(user.user, user.password)
             .then(response => {
@@ -27,20 +28,21 @@ describe('/PUT - PUT functionality ', function () {
                 )
                     .then(response => {
                         expect(response.status).to.eql(201)
+                        expect(response.body.message).to.eql("Produto adicionado com sucesso")
+
                         const productId = response.body.data.produtoId
 
-                        cy.apiPutProduct(
-                            token,
-                            productId,
-                            changedProduct.produtoNome,
-                            changedProduct.produtoValor,
-                            changedProduct.produtoCores,)
+                        cy.apiPostComponent(token, productId, component.name, component.qtd)
+                            .then(response => {
+                                expect(response.status).to.eql(201)
+                                expect(response.body.message).to.eql("Componente de produto adicionado com sucesso")
+                            })
                     })
-                    .then(response => {
-                        expect(response.status).to.eql(200)
-                        expect(response.body.message).to.eql("Produto alterado com sucesso")
-                    })
-                cy.apiDeleteData(token)
+                cy.apiDeleteData(token).then(response => {
+                    expect(response.status).to.eql(204)
+                })
+
+
 
             })
 

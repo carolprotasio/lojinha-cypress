@@ -1,4 +1,4 @@
-
+//users
 Cypress.Commands.add('apiLogin', (user, password) => { 
     cy.api({
         method: 'POST',
@@ -24,6 +24,7 @@ Cypress.Commands.add('apiCreateUser', (usuarioNome, usuarioLogin, usuarioSenha) 
     }).then(response => { return response })
   
 })
+//products
 Cypress.Commands.add('apiPostProduct', (token, produtoNome, produtoValor, produtoCores) => { 
     cy.api({
         method: 'POST',
@@ -93,7 +94,56 @@ Cypress.Commands.add('apiPutProduct', (token, productId, produtoNome, produtoVal
     }).then(response => { return response })
   
 })
+//components
 
+Cypress.Commands.add('apiPostComponent', (token, produtoId, name, qtd) => { 
+    cy.api({
+        method: 'POST',
+        url: `165.227.93.41/lojinha/v2/produtos/${produtoId}/componentes`, 
+        headers: { 'token': token },            
+        body: {
+            "componenteNome": name,
+            "componenteQuantidade": qtd
+        },
+        failOnStatusCode: false
+    }).then(response => { return response })
+  
+})
+Cypress.Commands.add('apiGetAllComponentOneProduct', (token, produtoId) => { 
+    cy.api({
+        method: 'GET',
+        url: `165.227.93.41/lojinha/v2/produtos/${produtoId}/componentes`, 
+        headers: { 'token': token }, 
+        failOnStatusCode: false
+    }).then(response => { return response })
+  
+})
+Cypress.Commands.add('apiGetOneComponentProduct', (token, produtoId, componenteId) => { 
+    cy.api({
+        method: 'GET',
+        url: `165.227.93.41/lojinha/v2/produtos/${produtoId}/componentes/${componenteId}`, 
+        headers: { 'token': token }, 
+        failOnStatusCode: false
+    }).then(response => { return response })
+  
+})
+Cypress.Commands.add('apiPutComponent', (token, produtoId, componenteId, name, qtd) => { 
+    cy.api({
+        method: 'PUT',
+        url: `165.227.93.41/lojinha/v2/produtos/${produtoId}/componentes/${componenteId}`, 
+        headers: { 'token': token }, 
+        body: {
+            "componenteNome": name,
+            "componenteQuantidade": qtd
+        },
+        failOnStatusCode: false
+    }).then(response => { return response })
+  
+})
+
+
+
+//delete
 Cypress.Commands.add('apiDeleteData', (token) => { 
     cy.api({
         method: 'DELETE',
@@ -103,5 +153,16 @@ Cypress.Commands.add('apiDeleteData', (token) => {
     }).then(response => { return response })
   
 })
+Cypress.Commands.add('apiDeleteOneComponent', (token, produtoId ,componenteId) => { 
+    cy.api({
+        method: 'DELETE',
+        url: `165.227.93.41/lojinha/v2/produtos/${produtoId}/componentes/${componenteId}`, 
+        headers: { 'token': token },
+        failOnStatusCode: false
+    }).then(response => { return response })
+  
+})
+
+
 
 
