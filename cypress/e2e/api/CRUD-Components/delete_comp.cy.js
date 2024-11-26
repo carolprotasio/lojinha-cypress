@@ -27,26 +27,20 @@ describe('/DELETE - component functionality ', function () {
                     const productId = response.body.data.produtoId
 
                     cy.apiPostComponent(token, productId, component.name, component.qtd)
-                    .then(response => {
-                        expect(response.status).to.eql(201)
-
-                        const componentId = response.body.data.componenteId
-
-                        cy.apiDeleteOneComponent(token, productId ,componentId)
                         .then(response => {
-                            expect(response.status).to.eql(204)
+                            expect(response.status).to.eql(201)
+
+                            const componentId = response.body.data.componenteId
+
+                            cy.apiDeleteOneComponent(token, productId, componentId)
+                                .then(response => {
+                                    expect(response.status).to.eql(204)
+
+                                    cy.apiDeleteData(token)
+                                })
                         })
-                    })
 
                 })
-                
-               
-                cy.apiDeleteData(token)
-                    .then(response => {                        
-                        expect(response.status).to.eql(204)
-                       
-                    })
-
 
             })
 

@@ -24,11 +24,9 @@ describe('API - create new user functionality', function () {
   
       cy.apiCreateUser(name, login, pass)
         .then(response => {
-          expect(response.status).to.equal(409)
-          
-        })
-  
-    });
+          expect(response.status).to.equal(409)          
+        })  
+    })
     it('CT-003 create new user & login', function () {
       const name = faker.name.findName()
       const login = faker.internet.userName()
@@ -48,8 +46,7 @@ describe('API - create new user functionality', function () {
           ])
         })
   
-    });
-    
+    })  
   
   
-  });
+  })

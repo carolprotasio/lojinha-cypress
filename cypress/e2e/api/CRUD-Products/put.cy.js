@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('/PUT - PUT functionality ', function () {
+describe('/PUT - product functionality ', function () {
 
     beforeEach(function () {
         cy.fixture('api_data').then(function (data) {
@@ -16,15 +16,13 @@ describe('/PUT - PUT functionality ', function () {
             .then(response => {
                 expect(response.status).to.equal(200)
 
-                const token = response.body.data.token
-                cy.log(token)
+                const token = response.body.data.token           
 
                 cy.apiPostProduct(
                     token,
                     product.produtoNome,
                     product.produtoValor,
-                    product.produtoCores
-                )
+                    product.produtoCores)
                     .then(response => {
                         expect(response.status).to.eql(201)
                         const productId = response.body.data.produtoId
@@ -34,15 +32,14 @@ describe('/PUT - PUT functionality ', function () {
                             productId,
                             changedProduct.produtoNome,
                             changedProduct.produtoValor,
-                            changedProduct.produtoCores,)
-                    })
-                    .then(response => {
-                        expect(response.status).to.eql(200)
-                        expect(response.body.message).to.eql("Produto alterado com sucesso")
-                    })
-                cy.apiDeleteData(token)
+                            changedProduct.produtoCores)
+                            .then(response => {
+                                expect(response.status).to.eql(200)
+                                expect(response.body.message).to.eql("Produto alterado com sucesso")
 
+                                cy.apiDeleteData(token)
+                            })
+                    })
             })
-
     });
 });

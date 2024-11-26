@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-
 import faker from 'faker'
 
 describe('API - Login functionality', function () {
@@ -56,7 +55,7 @@ describe('API - Login functionality', function () {
     cy.apiLogin(user.user, user.password)
       .then(response => {
         expect(response.status).to.equal(401)
-       
+
       })
   })
 

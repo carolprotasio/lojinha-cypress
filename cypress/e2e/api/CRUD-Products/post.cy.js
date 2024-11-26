@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-import faker from 'faker'
 
 describe('/POST - create new product ', function () {
 
@@ -16,27 +15,21 @@ describe('/POST - create new product ', function () {
             .then(response => {
                 expect(response.status).to.equal(200)
 
-                const token = response.body.data.token
-                cy.log(token)
+                const token = response.body.data.token               
 
                 cy.apiPostProduct(
                     token,
                     product.produtoNome,
                     product.produtoValor,
-                    product.produtoCores
-                    )
-                    .then(response => {
-                        cy.log('Response:', response)
+                    product.produtoCores)
+                    .then(response => {                        
                         expect(response.status).to.eql(201)
                         expect(response.body.message).to.eql("Produto adicionado com sucesso")
-                    })
-                    cy.apiDeleteData(token).then(response => {
-                        expect(response.status).to.eql(204)
-                    })
-                
 
-
+                        cy.apiDeleteData(token).then(response => {
+                            expect(response.status).to.eql(204)
+                        })
+                    })
             })
-
-    });
+    })
 });

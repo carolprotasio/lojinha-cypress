@@ -18,35 +18,31 @@ describe('/PUT - component functionality ', function () {
                 expect(response.status).to.equal(200)
 
                 const token = response.body.data.token
-                cy.log(token)
 
                 cy.apiPostProduct(
                     token,
                     product.produtoNome,
                     product.produtoValor,
-                    product.produtoCores
-                )
+                    product.produtoCores)
                     .then(response => {
                         expect(response.status).to.eql(201)
-                        const productId = response.body.data.produtoId    
+                        const productId = response.body.data.produtoId
 
                         cy.apiPostComponent(token, productId, component.name, component.qtd)
                             .then(response => {
                                 expect(response.status).to.eql(201)
-                               
+
                                 const componentId = response.body.data.componenteId
 
                                 cy.apiPutComponent(token, productId, componentId, changedComponent.name, changedComponent.qtd)
-                                 .then(response => {
-                                    expect(response.status).to.eql(200)
-                                    expect(response.body.message).to.eql("Componente de produto alterado com sucesso")
+                                    .then(response => {
+                                        expect(response.status).to.eql(200)
+                                        expect(response.body.message).to.eql("Componente de produto alterado com sucesso")
 
-                                    cy.apiDeleteData(token)
-                                 })
+                                        cy.apiDeleteData(token)
+                                    })
                             })
                     })
-                
-
             })
 
     });

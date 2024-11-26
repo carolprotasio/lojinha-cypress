@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('/GET - get functionality ', function () {
+describe('/GET - product functionality ', function () {
 
     beforeEach(function () {
         cy.fixture('api_data').then(function (data) {
@@ -21,30 +21,28 @@ describe('/GET - get functionality ', function () {
                     token,
                     product.produtoNome,
                     product.produtoValor,
-                    product.produtoCores
-                )
+                    product.produtoCores)
 
                 cy.apiPostProduct(
                     token,
                     product2.produtoNome,
                     product2.produtoValor,
-                    product2.produtoCores
-                )
+                    product2.produtoCores)
                     .then(response => {
                         expect(response.status).to.eql(201)
-                    })
-                cy.apiGetAllProducts(token)
-                    .then(response => {
-                        expect(response.status).to.eql(200)
-                        expect(response.body.message).to.eql("Listagem de produtos realizada com sucesso")
-                    })
-                cy.apiDeleteData(token)
-                    .then(response => {
-                        expect(response.status).to.eql(204)
 
+                        cy.apiGetAllProducts(token)
+                            .then(response => {
+                                expect(response.status).to.eql(200)
+                                expect(response.body.message).to.eql("Listagem de produtos realizada com sucesso")
+
+                                cy.apiDeleteData(token)
+                                    .then(response => {
+                                        expect(response.status).to.eql(204)
+
+                                    })
+                            })
                     })
-
-
             })
 
     });
@@ -62,30 +60,25 @@ describe('/GET - get functionality ', function () {
                     token,
                     product.produtoNome,
                     product.produtoValor,
-                    product.produtoCores
-                )
+                    product.produtoCores)
 
                 cy.apiPostProduct(
                     token,
                     product3.produtoNome,
                     product3.produtoValor,
-                    product3.produtoCores
-                )
+                    product3.produtoCores)
                     .then(response => {
                         expect(response.status).to.eql(201)
                         const productId = response.body.data.produtoId
 
                         cy.apiGetProductsById(token, productId)
-                        .then(response => {
-                            expect(response.status).to.eql(200)
-                            expect(response.body.message).to.eql("Detalhando dados do produto")
-                        })
+                            .then(response => {
+                                expect(response.status).to.eql(200)
+                                expect(response.body.message).to.eql("Detalhando dados do produto")
 
-                        cy.apiDeleteData(token)
-
-                    })  
-
+                                cy.apiDeleteData(token)
+                            })
+                    })
             })
-
-    });
-});
+    })
+})

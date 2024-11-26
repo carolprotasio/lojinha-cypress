@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('/GET - get functionality ', function () {
+describe('/GET - component functionality ', function () {
 
     beforeEach(function () {
         cy.fixture('api_data').then(function (data) {

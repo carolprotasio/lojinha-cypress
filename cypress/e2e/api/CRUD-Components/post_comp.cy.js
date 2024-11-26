@@ -24,8 +24,7 @@ describe('/POST - component functionality ', function () {
                     token,
                     product.produtoNome,
                     product.produtoValor,
-                    product.produtoCores
-                )
+                    product.produtoCores)
                     .then(response => {
                         expect(response.status).to.eql(201)
                         expect(response.body.message).to.eql("Produto adicionado com sucesso")
@@ -36,14 +35,10 @@ describe('/POST - component functionality ', function () {
                             .then(response => {
                                 expect(response.status).to.eql(201)
                                 expect(response.body.message).to.eql("Componente de produto adicionado com sucesso")
+
+                                cy.apiDeleteData(token)
                             })
                     })
-                cy.apiDeleteData(token).then(response => {
-                    expect(response.status).to.eql(204)
-                })
-
-
-
             })
 
     });
