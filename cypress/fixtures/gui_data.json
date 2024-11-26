@@ -1,0 +1,54 @@
+{
+  "user":{
+    "user": "ctest",
+    "password": "123456"
+  },
+  "user2":{
+    "user": "dogBite",
+    "password": "123456"
+  },
+  "notPass":{
+    "user": "admin",
+    "password": "123456"
+  },
+  "notUser":{
+    "user": "notUser",
+    "password": "123456"
+  },
+  "emptyUser":{    
+    "password": "123456"
+  },
+  "emptyPass":{
+    "user": "ctest"
+    
+  },
+  "product":{
+    "name": "PlayStation 5",
+    "price": "380000",
+    "colour": "black, white"
+  },
+  "product1":{
+    "name": "Tv Sansung",
+    "price": "130000",
+    "colour": "black"
+  },
+  "product2":{
+    "name": "Set drums",
+    "price": "480000",
+    "colour": "black, green"
+  },  
+  "component": {
+    "name": "gift card",
+    "qtd": 1
+  },
+  "component2": {
+    "name": "extra cards",
+    "qtd": 1
+  },
+  "component_less": {
+    "name": "extra cards",
+    "qtd": 0
+  }
+    
+  
+}

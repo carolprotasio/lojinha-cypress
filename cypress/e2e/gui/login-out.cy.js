@@ -3,7 +3,7 @@
 describe('Login Functionality', () => {
   
   beforeEach(function() {
-    cy.fixture('data').then(function (data) {
+    cy.fixture('gui_data').then(function (data) {
       this.data = data
     })
   })
@@ -51,6 +51,15 @@ describe('Login Functionality', () => {
     const text = "Falha ao fazer o login"
     cy.emptyUser(user.user)   
     cy.getToast(text) 
+
+  })
+  it.only('CT-007 should logout with success', function () {     
+    const user = this.data.user2  
+    const text = "Acessar a Lojinha"
+    cy.userLogin(user.user, user.password)
+    cy.successLogin() 
+    cy.logout()
+    cy.get('h4').should("have.text", text )
 
   })
 
