@@ -1,30 +1,32 @@
-name: Cypress Tests
+name: Cypress Cloud
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: 
+  workflow_dispatch:
+    inputs:
+      spec:
+        description: 'Run by cypress command line'
+        default: 'cypress/e2e/*'
 
 jobs:
-  cypress:
+  cypress-e2e-electron:
     runs-on: ubuntu-latest
-
+    
+    container:
+      image: cypress/browsers:node-20.17.0-chrome-129.0.6668.70-1-ff-130.0.1-edge-129.0.2792.52-1
+      options: --user 1001
+    
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2  
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6.5.0
         with:
-          node-version: '16' # ou a versão do Node que você está usando
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Cypress tests
-        run: npx cypress run --record
+          install-command: yarn install  
+          browser: electron
+          record: true
+          group: UI Electron
+          spec: ${{ github.event.inputs.spec }} 
+          
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  
